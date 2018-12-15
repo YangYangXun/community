@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
 
@@ -53,8 +53,8 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'captcha' => 'required|captcha',
         ], [
-            'captcha.required' => '???¤£¯à?ªÅ',
-            'captcha.captcha' => '?™]¤J¥¿ÚÌªº???',
+            'captcha.required' => 'éªŒè?????ä¸è?½ä¸ºç©?',
+            'captcha.captcha' => 'è¯·è?“å?¥æ­£ç¡®ç??éªŒè?????',
         ]);
     }
 
@@ -62,7 +62,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
