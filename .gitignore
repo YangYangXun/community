@@ -10,3 +10,9 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .env
+# 忽略上傳圖片
+/public/uploads/images/avatars
+
+app/Http/Controllers/UsersController\.php
+
+app/Http/Requests/UserRequest\.php

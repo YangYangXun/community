@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Handlers\ImageUploadHandler;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 
@@ -33,10 +34,19 @@ class UsersController extends Controller
      * 1. ¨Ï¥Î FormRequest -> ±ÀÂË
      * 2. ¤â¤u½Õ¥Î validator
      */
-    public function update(UserRequest $request, User $user)
+    public function update(UserRequest $request, ImageUploadHandler $uploader, User $user)
     {
-        $user->update($request->all());
-        return redirect()->route('users.show', $user->id)->with('success', '­Ó¤H¸ê®Æ§ó·s¦¨¥\!');
+        $data = $request->all();
+
+        if ($request->avatar) {
+            $result = $uploader->save($request->avatar, 'avatars', $user->id, 362);
+            if ($result) {
+                $data['avatar'] = $result['path'];
+            }
+        }
+
+        $user->update($data);
+        return redirect()->route('users.show', $user->id)->with('success', 'ŸÄ¤H?®Æ§ó·s¦¨¥\¡I');
     }
 
 }
